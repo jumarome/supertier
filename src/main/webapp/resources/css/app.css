@@ -1,0 +1,21 @@
+.full-height{
+    height: 100%;
+}
+.full-viewport-height{
+    height:100vh;
+}
+.flex-container{
+    display: flex;
+}
+.vertical-centered{
+    flex-direction: column;
+    justify-content: center;
+}
+.horizontal-centered{
+    align-items: center;
+}
+
+.icon-right-margin{
+    margin-right: 10px;
+}
+
