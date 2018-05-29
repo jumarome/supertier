@@ -4,6 +4,7 @@ import com.gt.supertier.Person;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -17,7 +18,7 @@ public class User extends Person {
     private String passwordHash;
 
     @ManyToMany
-    private List<Group> groups;
+    private Set<Group> groups;
 
     public User() {}
 
