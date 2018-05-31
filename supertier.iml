@@ -47,5 +47,12 @@
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.deltaspike.modules:deltaspike-proxy-module-api:1.8.1" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.deltaspike.modules:deltaspike-proxy-module-impl-asm5:1.8.1" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.deltaspike.modules:deltaspike-jpa-module-impl:1.8.1" level="project" />
+    <orderEntry type="library" name="Maven: com.github.adminfaces:admin-template:1.0.0-RC15" level="project" />
+    <orderEntry type="library" name="Maven: org.primefaces:primefaces:6.2" level="project" />
+    <orderEntry type="library" name="Maven: org.omnifaces:omnifaces:2.1" level="project" />
+    <orderEntry type="library" name="Maven: com.github.adminfaces:admin-theme:1.0.0-RC15" level="project" />
+    <orderEntry type="library" name="Maven: org.primefaces.extensions:primefaces-extensions:6.1.0" level="project" />
+    <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.2.4" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.1" level="project" />
   </component>
 </module>
