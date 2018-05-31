@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/admin.xhtml"> (1)
+
+    <ui:define name="head">
+        <title>Admin Starter</title>
+    </ui:define>
+
+    <ui:define name="logo-lg">
+        Admin Starter
+    </ui:define>
+
+    <ui:define name="logo-mini">
+        Admin
+    </ui:define>
+
+    <ui:define name="menu">
+       <ui:include src="includes/sidebar-menu.xhtml"/>
+    </ui:define>
+
+    <ui:define name="top-menu">
+        <ui:include src="/WEB-INF/includes/top-menu.xhtml"/>
+    </ui:define>
+
+    <ui:define name="title">
+        Page title
+    </ui:define>
+
+    <ui:define name="description">
+        A page description
+    </ui:define>
+
+    <ui:define name="body">
+        <h2>Page body</h2>
+    </ui:define>
+
+
+    <ui:define name="footer">
+       Footer
+    </ui:define>
+
+
+</ui:composition>
