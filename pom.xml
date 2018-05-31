@@ -39,6 +39,18 @@
             <scope>runtime</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.adminfaces</groupId>
+            <artifactId>admin-template</artifactId>
+            <version>1.0.0-RC15</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.primefaces.extensions</groupId>
+            <artifactId>primefaces-extensions</artifactId>
+            <version>6.1.0</version>
+        </dependency>
+
     </dependencies>
     <build>
         <finalName>super-tier</finalName>
