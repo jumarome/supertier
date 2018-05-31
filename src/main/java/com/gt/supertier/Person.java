@@ -18,6 +18,12 @@ public abstract class Person {
     @Column(name = "last_name",length = 30)
     protected String lastName;
 
+    @Column(length = 50)
+    protected String email;
+
+    @Transient
+    protected String fullName;
+
     public Person() {}
 
     public Person(String name, String lastName) {
@@ -43,5 +49,13 @@ public abstract class Person {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getFullName() {
+        return name+" "+lastName;
     }
 }
