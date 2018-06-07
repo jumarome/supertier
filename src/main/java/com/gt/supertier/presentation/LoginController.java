@@ -27,14 +27,11 @@ import static javax.security.enterprise.AuthenticationStatus.SUCCESS;
 @Named
 @SessionScoped
 public class LoginController implements Serializable {
-    @Inject
-    private SecurityContext securityContext;
 
-    @Inject
-    private ExternalContext externalContext;
-
-    @Inject
-    private FacesContext facesContext;
+    private final SecurityContext securityContext;
+    private final ExternalContext externalContext;
+    private final FacesContext facesContext;
+    private final UserManager userManager;
 
     @NotNull
     private String username;
@@ -45,7 +42,12 @@ public class LoginController implements Serializable {
     private User currentUser;
 
     @Inject
-    private UserManager userManager;
+    public LoginController(SecurityContext securityContext, ExternalContext externalContext, FacesContext facesContext, UserManager userManager) {
+        this.securityContext = securityContext;
+        this.externalContext = externalContext;
+        this.facesContext = facesContext;
+        this.userManager = userManager;
+    }
 
 
     public void login() throws IOException {

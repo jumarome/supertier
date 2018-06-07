@@ -14,10 +14,15 @@ import java.util.List;
 @ViewScoped
 public class UserController implements Serializable {
 
-    @Inject
-    private UserManager userManager;
+
+    private final UserManager userManager;
 
     private User selectedUser;
+
+    @Inject
+    public UserController(UserManager userManager) {
+        this.userManager = userManager;
+    }
 
     public List<User> findAll(){
         return userManager.findAll();
