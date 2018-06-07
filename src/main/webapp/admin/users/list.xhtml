@@ -22,21 +22,27 @@
     </ui:define>
 
     <ui:define name="description">
-        Users
+        Manage Users
     </ui:define>
 
+    <ui:param name="selectedUser" value="#{ userController.selectedUser}"/>
+
     <ui:define name="body">
-        <h:form id="userForm">
-            <b:row>
+        <b:row>
+        <h:form id="dataForm">
                 <b:column colMd="6">
-                    <p:dataTable var="user" value="#{userController.findAll()}" selectionMode="single"  selection="#{userController.selectedUser}" rowKey="#{user.id}">
-                        <p:ajax event="rowSelect" update=":userForm:userDetails" />
+                    <p:dataTable var="user" value="#{userController.findAll()}" selectionMode="single"  selection="#{selectedUser}" rowKey="#{user.id}">
+                        <p:ajax event="rowSelect" update=":editForm:userDetails" />
                         <p:column headerText="Id">
                             <h:outputText value="#{user.id}" />
                         </p:column>
 
                         <p:column headerText="Username">
                             <h:outputText value="#{user.username}" />
+                        </p:column>
+
+                        <p:column headerText="Email">
+                            <h:outputText value="#{user.email}" />
                         </p:column>
 
                         <p:column headerText="Name">
@@ -46,14 +52,19 @@
                     </p:dataTable>
                 </b:column>
 
-
-                <b:column colMd="6" id="userDetails">
-                    <p>User id: #{userController.selectedUser.id}</p>
-                </b:column>
-            </b:row>
-
         </h:form>
 
+        <h:form id="editForm">
+            <b:column colMd="6" id="userDetails">
+                <h:panelGroup layout="block" rendered="#{not empty selectedUser}">
+                    <b:inputText label="Name" value="#{selectedUser.name}" />
+                    <b:inputText label="Last Name" value="#{selectedUser.lastName}" />
+                    <b:inputText label="Email" value="#{selectedUser.email}" />
+                    <b:inputText label="Username" value="#{selectedUser.username}"  />
+                </h:panelGroup>
+            </b:column>
+        </h:form>
+        </b:row>
     </ui:define>
 
 </ui:composition>
