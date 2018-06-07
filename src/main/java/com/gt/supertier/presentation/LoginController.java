@@ -21,6 +21,7 @@ import java.io.Serializable;
 
 import static javax.security.enterprise.AuthenticationStatus.SEND_CONTINUE;
 import static javax.security.enterprise.AuthenticationStatus.SEND_FAILURE;
+import static javax.security.enterprise.AuthenticationStatus.SUCCESS;
 
 
 @Named
@@ -88,7 +89,7 @@ public class LoginController implements Serializable {
 
     public void checkAuthentication() throws IOException {
         if(securityContext.getCallerPrincipal()!=null)
-            externalContext.redirect(externalContext.getRequestContextPath() + "/index.xhtml");
+            externalContext.redirect(externalContext.getRequestContextPath() + "/admin/home.xhtml");
     }
 
 }
