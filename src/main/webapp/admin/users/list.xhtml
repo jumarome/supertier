@@ -3,19 +3,13 @@
                 xmlns:b="http://bootsfaces.net/ui"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui" xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
                 template="/WEB-INF/base.xhtml"> (1)
 
     <ui:define name="head">
         <title>Users</title>
     </ui:define>
 
-    <ui:define name="logo-lg">
-        Admin Starter
-    </ui:define>
-
-    <ui:define name="logo-mini">
-        Admin
-    </ui:define>
 
     <ui:define name="title">
         <h2>Users</h2>
@@ -30,23 +24,24 @@
     <ui:define name="body">
         <b:row>
         <h:form id="dataForm">
-                <b:column colMd="6">
-                    <p:dataTable var="user" value="#{userController.findAll()}" selectionMode="single"  selection="#{selectedUser}" rowKey="#{user.id}">
+                <b:column colMd="8">
+                    <p:dataTable var="user" value="#{userController.users}" selectionMode="single"  selection="#{selectedUser}" rowKey="#{user.id}">
                         <p:ajax event="rowSelect" update=":editForm:userDetails" />
-                        <p:column headerText="Id">
-                            <h:outputText value="#{user.id}" />
+
+                        <p:column headerText="Nombre">
+                            <h:outputText value="#{user.firstName}" />
                         </p:column>
 
-                        <p:column headerText="Username">
+                        <p:column headerText="Apellido">
+                            <h:outputText value="#{user.lastName}" />
+                        </p:column>
+
+                        <p:column headerText="Nombre de usuario">
                             <h:outputText value="#{user.username}" />
                         </p:column>
 
-                        <p:column headerText="Email">
+                        <p:column headerText="Correo">
                             <h:outputText value="#{user.email}" />
-                        </p:column>
-
-                        <p:column headerText="Name">
-                            <h:outputText value="#{user.fullName}" />
                         </p:column>
 
                     </p:dataTable>
@@ -55,13 +50,25 @@
         </h:form>
 
         <h:form id="editForm">
-            <b:column colMd="6" id="userDetails">
-                <h:panelGroup layout="block" rendered="#{not empty selectedUser}">
-                    <b:inputText label="Name" value="#{selectedUser.name}" />
-                    <b:inputText label="Last Name" value="#{selectedUser.lastName}" />
-                    <b:inputText label="Email" value="#{selectedUser.email}" />
-                    <b:inputText label="Username" value="#{selectedUser.username}"  />
-                </h:panelGroup>
+            <b:column colMd="4" id="userDetails">
+                <b:panel contentDisabled="#{not userController.editMode}" rendered="#{not empty selectedUser}" collapsible="false" >
+                    <f:facet name="heading">
+                       Los campos obligatorios se muestran con *
+                    </f:facet>
+                    <h:panelGroup layout="block">
+                        <b:inputText  label="Nombre" value="#{selectedUser.firstName}" required="true" />
+                        <b:inputText  label="Apellido" value="#{selectedUser.lastName}" required="true" />
+                        <b:inputText  label="Correo" value="#{selectedUser.email}"  required="true"/>
+                    </h:panelGroup>
+                    <f:facet name="footer">
+                        <b:commandButton  ajax="true" actionListener="#{userController.toggleEditMode}" value="Editar" update="@form" iconAwesome="edit"  rendered="#{not userController.editMode}"  />
+                        <b:commandButton  ajax="true" actionListener="#{userController.updateSelectedUser}" value="Guardar" update="@form,:dataForm  " iconAwesome="save"  look="success" rendered="#{userController.editMode}"  />
+                        <b:commandButton style="margin-left:10px;"  ajax="true" actionListener="#{userController.toggleEditMode}" value="Cancelar" update="@form" iconAwesome="times"  rendered="#{userController.editMode}"  >
+                            <p:ajax update="@form" resetValues="true" />
+                        </b:commandButton>
+                    </f:facet>
+                </b:panel>
+
             </b:column>
         </h:form>
         </b:row>
