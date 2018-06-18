@@ -63,8 +63,8 @@
                     <f:facet name="footer">
                         <b:commandButton  ajax="true" actionListener="#{userController.toggleEditMode}" value="Editar" update="@form" iconAwesome="edit"  rendered="#{not userController.editMode}"  />
                         <b:commandButton  ajax="true" actionListener="#{userController.updateSelectedUser}" value="Guardar" update="@form,:dataForm  " iconAwesome="save"  look="success" rendered="#{userController.editMode}"  />
-                        <b:commandButton style="margin-left:10px;"  ajax="true" actionListener="#{userController.toggleEditMode}" value="Cancelar" update="@form" iconAwesome="times"  rendered="#{userController.editMode}"  >
-                            <p:ajax update="@form" resetValues="true" />
+                        <b:commandButton style="margin-left:10px;" immediate="true" iconAwesome="times"   actionListener="#{userController.toggleEditMode}" value="Cancelar" update="@form"   rendered="#{userController.editMode}"  >
+                            <p:resetInput target="@form" />
                         </b:commandButton>
                     </f:facet>
                 </b:panel>
