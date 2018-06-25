@@ -3,6 +3,7 @@ package com.gt.supertier.business.user.entitiy;
 import com.gt.supertier.Person;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -15,10 +16,24 @@ public class User extends Person {
     private String username;
 
     @Column(length = 60,name = "password_hash")
-    private String passwordHash;
+    protected String passwordHash;
 
     @ManyToMany
     private Set<Group> groups;
+
+    public User() {
+    }
+
+    public User(String firstName, String lastName, String username) {
+        super(firstName, lastName);
+        this.username = username;
+        this.groups = new HashSet<>();
+    }
+
+    public void addToGroup(Group group){
+        groups.add(group);
+    }
+
 
     public String getUsername() {
         return username;
@@ -32,15 +47,8 @@ public class User extends Person {
         return passwordHash;
     }
 
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
-    }
-
     public Set<Group> getGroups() {
         return groups;
     }
 
-    public void setGroups(Set<Group> groups) {
-        this.groups = groups;
-    }
 }

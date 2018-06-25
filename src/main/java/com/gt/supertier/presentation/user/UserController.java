@@ -2,6 +2,7 @@ package com.gt.supertier.presentation.user;
 
 import com.gt.supertier.business.user.boundary.UserManager;
 import com.gt.supertier.business.user.entitiy.User;
+import com.gt.supertier.business.user.entitiy.UserDto;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -23,6 +24,8 @@ public class UserController implements Serializable {
 
     private List<User> users;
 
+    private UserDto userDto;
+
     @Inject
     public UserController(UserManager userManager) {
         this.userManager = userManager;
@@ -31,6 +34,7 @@ public class UserController implements Serializable {
     @PostConstruct
     public void init(){
         this.users = userManager.findAll();
+        this.userDto = new UserDto();
     }
 
     public List<User> getUsers() {
@@ -43,6 +47,14 @@ public class UserController implements Serializable {
 
     public void setSelectedUser(User selectedUser) {
         this.selectedUser = selectedUser;
+    }
+
+    public UserDto getUserDto() {
+        return userDto;
+    }
+
+    public void setUserDto(UserDto userDto) {
+        this.userDto = userDto;
     }
 
     public boolean isEditMode() {

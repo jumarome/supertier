@@ -22,11 +22,32 @@
     <ui:param name="selectedUser" value="#{ userController.selectedUser}"/>
 
     <ui:define name="body">
+        <h:form id="userCreationForm">
+            <b:modal  title="Nuevo Usuario" styleClass="userCreationModal">
+                <h:panelGroup id="modalBody" layout="block">
+                    <b:fetchBeanInfos />
+                    <b:inputText label="Nombre" required="true" value="#{userController.userDto.firstName}"/>
+                    <b:inputText label="Apellido" required="true" value="#{userController.userDto.lastName}"/>
+                    <b:inputText label="Correo" required="true" value="#{userController.userDto.email}"/>
+                    <b:inputText label="Username" required="true" value="#{userController.userDto.email}"/>
+                    <b:inputSecret label="Contraseña" required="true" value="#{userController.userDto.password}"/>
+                    <b:inputSecret label="Confirmación de Contraseña" required="true" value="#{userController.userDto.passwordConfirmation}"/>
+                </h:panelGroup>
+
+                <f:facet name="footer">
+                    <b:button value="Close" dismiss="modal" />
+                    <b:commandButton oncomplete="if(!validationFailed) $('.userCreationModal').modal('hide')"
+                                     value="Guardar" ajax="true" update=":userCreationForm:modalBody"  />
+                </f:facet>
+            </b:modal>
+        </h:form>
         <b:row>
-        <h:form id="dataForm">
-                <b:column colMd="8">
+            <b:column colMd="8">
+                <b:button value="Nuevo Usuario"  onclick="$('.userCreationModal').modal()" />
+                <h:form id="dataForm">
+
                     <p:dataTable var="user" value="#{userController.users}" selectionMode="single"  selection="#{selectedUser}" rowKey="#{user.id}">
-                        <p:ajax event="rowSelect" update=":editForm:userDetails" />
+                        <p:ajax event="rowSelect" update="userDetails" />
 
                         <p:column headerText="Nombre">
                             <h:outputText value="#{user.firstName}" />
@@ -45,33 +66,36 @@
                         </p:column>
 
                     </p:dataTable>
-                </b:column>
 
-        </h:form>
 
-        <h:form id="editForm">
-            <b:column colMd="4" id="userDetails">
-                <b:panel contentDisabled="#{not userController.editMode}" rendered="#{not empty selectedUser}" collapsible="false" >
-                    <f:facet name="heading">
-                       Los campos obligatorios se muestran con *
-                    </f:facet>
-                    <h:panelGroup layout="block">
-                        <b:inputText  label="Nombre" value="#{selectedUser.firstName}" required="true" />
-                        <b:inputText  label="Apellido" value="#{selectedUser.lastName}" required="true" />
-                        <b:inputText  label="Correo" value="#{selectedUser.email}"  required="true"/>
-                    </h:panelGroup>
-                    <f:facet name="footer">
-                        <b:commandButton  ajax="true" actionListener="#{userController.toggleEditMode}" value="Editar" update="@form" iconAwesome="edit"  rendered="#{not userController.editMode}"  />
-                        <b:commandButton  ajax="true" actionListener="#{userController.updateSelectedUser}" value="Guardar" update="@form,:dataForm  " iconAwesome="save"  look="success" rendered="#{userController.editMode}"  />
-                        <b:commandButton style="margin-left:10px;" immediate="true" iconAwesome="times"   actionListener="#{userController.toggleEditMode}" value="Cancelar" update="@form"   rendered="#{userController.editMode}"  >
-                            <p:resetInput target="@form" />
-                        </b:commandButton>
-                    </f:facet>
-                </b:panel>
-
+                </h:form>
             </b:column>
-        </h:form>
+
+            <b:column colMd="4" id="userDetails">
+                <h:form id="editForm">
+
+                    <b:panel contentDisabled="#{not userController.editMode}" rendered="#{not empty selectedUser}" collapsible="false" >
+                        <f:facet name="heading">
+                            Los campos obligatorios se muestran con *
+                        </f:facet>
+                        <h:panelGroup layout="block">
+                            <b:inputText  label="Nombre" value="#{selectedUser.firstName}" required="true" />
+                            <b:inputText  label="Apellido" value="#{selectedUser.lastName}" required="true" />
+                            <b:inputText  label="Correo" value="#{selectedUser.email}"  required="true"/>
+                        </h:panelGroup>
+                        <f:facet name="footer">
+                            <b:commandButton  ajax="true" actionListener="#{userController.toggleEditMode}" value="Editar" update="@form" iconAwesome="edit"  rendered="#{not userController.editMode}"  />
+                            <b:commandButton  ajax="true" actionListener="#{userController.updateSelectedUser}" value="Guardar" update="@form,:dataForm  " iconAwesome="save"  look="success" rendered="#{userController.editMode}"  />
+                            <b:commandButton style="margin-left:10px;" immediate="true" iconAwesome="times"   actionListener="#{userController.toggleEditMode}" value="Cancelar" update="@form"   rendered="#{userController.editMode}"  >
+                                <p:resetInput target="@form" />
+                            </b:commandButton>
+                        </f:facet>
+                    </b:panel>
+
+                </h:form>
+            </b:column>
         </b:row>
+
     </ui:define>
 
 </ui:composition>
